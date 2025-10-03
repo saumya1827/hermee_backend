@@ -19,10 +19,17 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch((err) => console.error('❌ MongoDB connection error:', err));
 
 // --- Middleware ---
+const allowedOrigins = [
+  'http://localhost:5174',
+  'https://labelherme.vercel.app'
+];
+
 app.use(cors({
-  origin: 'http://localhost:5176',
+  origin: allowedOrigins,
   credentials: true
 }));
+
+
 app.use(express.json());
 
 // --- Schemas ---
